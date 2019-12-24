@@ -1,8 +1,8 @@
 export class Auth {
-    static saveData(data) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.username);
-        localStorage.setItem('userId', data.userId);
+    static saveData(token, username, userId) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', username);
+        localStorage.setItem('userId', userId);
     }
 
     static isLoggedIn() {

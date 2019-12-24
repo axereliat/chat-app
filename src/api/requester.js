@@ -14,4 +14,8 @@ export class Requester {
             username, password
         });
     }
+
+    static fetchUsers() {
+        return axios.get(baseUrl + 'users');
+    }
 }

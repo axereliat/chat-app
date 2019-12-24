@@ -2,8 +2,9 @@ import React, {Fragment, useState} from 'react';
 import {Button, FormGroup, Input, Label} from "reactstrap";
 import {Requester} from "../../api/requester";
 import toastr from 'toastr';
+import {Auth} from "../../api/auth";
 
-const Login = () => {
+const Login = props => {
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -23,7 +24,10 @@ const Login = () => {
         Requester.login(values.username, values.password)
             .then(res => {
                 setLoading(false);
-                console.log(res.headers['Authorization']);
+                const {token, username, userId} = res.data;
+                Auth.saveData(token, username, userId);
+                toastr.success('You are successfully logged in.');
+                props.history.push('/');
             })
             .catch(() => {
                 setLoading(false);
